@@ -1,3 +1,4 @@
+// Task-1
 function createStepCounter() {
   let steps = 0;
   return function () {
@@ -8,7 +9,7 @@ function createStepCounter() {
 const stepper = createStepCounter();
 console.log("Current steps", stepper());
 console.log("Current steps", stepper());
-
+// Task-2
 function createEcho() {
   let text;
   return function (str) {
@@ -20,7 +21,7 @@ const echo = createEcho();
 echo("Привіт"); // "Привіт"
 echo("Бувай"); // "Привіт"
 echo("Як справи"); // "Бувай"
-
+// Task-3
 function greeterFactory(greetingWord) {
   return function (name) {
     return `${greetingWord}, ${name}!`;
@@ -28,7 +29,7 @@ function greeterFactory(greetingWord) {
 }
 const sayHello = greeterFactory("Hi");
 console.log(sayHello("Oleg"));
-
+// Task-4
 function createMoneyBox(holderName) {
   let balance = 0;
   return function (sum) {
@@ -38,7 +39,7 @@ function createMoneyBox(holderName) {
 }
 const user1 = createMoneyBox("Oleg");
 console.log(user1(50));
-
+// Task-5
 function taxCalculator(taxRate) {
   return function (value) {
     return `Your tax is: ${value * taxRate}`;
@@ -46,7 +47,7 @@ function taxCalculator(taxRate) {
 }
 const bill = taxCalculator(0.2);
 console.log(bill(2000));
-
+// Task-6
 function createSecureCounter(correctPassword) {
   let count = 0;
   return function (password) {
@@ -56,7 +57,7 @@ function createSecureCounter(correctPassword) {
     } else return "Acsess denied";
   };
 }
-
+// Task-7
 function createStyleWrapper(cssClass) {
   return function (str) {
     return `<p class="${cssClass}">${str}</p>`;
@@ -64,7 +65,7 @@ function createStyleWrapper(cssClass) {
 }
 const parg = createStyleWrapper("text-info");
 console.log(parg("Dinner starts at 19.00"));
-
+// Task-8
 function createAttemptsLimiter(maxAttempts) {
   let counter = maxAttempts;
   return function (password) {
@@ -75,7 +76,7 @@ function createAttemptsLimiter(maxAttempts) {
 }
 const largo = createAttemptsLimiter(4);
 console.log(largo("1234"));
-
+// Task-9
 function createTicketGenerator(eventPrefix) {
   let ticketNumber = 0;
   return function () {
@@ -86,7 +87,7 @@ function createTicketGenerator(eventPrefix) {
 const ticket = createTicketGenerator("Paris");
 console.log(ticket());
 console.log(ticket());
-
+// Task-10
 function createSimpleBox() {
   let item = null;
   return {
@@ -100,7 +101,7 @@ function createSimpleBox() {
     },
   };
 }
-
+// Task-11
 function createToggle() {
   let isActive = false;
   return function () {
@@ -111,7 +112,7 @@ function createToggle() {
 const status = createToggle();
 console.log(status());
 console.log(status());
-
+// Task-12
 function createRangeLimiter(min, max) {
   return function (num) {
     if (num < min) return min;
@@ -121,7 +122,7 @@ function createRangeLimiter(min, max) {
 }
 const range = createRangeLimiter(5, 10);
 console.log(range(99));
-
+// Task-13
 function filterByLength(minLength) {
   return function (element) {
     return element.length >= minLength;
@@ -129,7 +130,7 @@ function filterByLength(minLength) {
 }
 const words = ["я", "код", "програміст", "js"];
 console.log(words.filter(filterByLength(4))); // ["програміст"]
-
+// Task-14
 function createSmartAdder(baseValue) {
   return function (num) {
     baseValue += num;
@@ -138,7 +139,7 @@ function createSmartAdder(baseValue) {
 }
 const calc = createSmartAdder(10);
 console.log(calc(3));
-
+// Task-15
 function createClickSpy(notifyEvery) {
   let counter = 0;
   return function () {
@@ -146,7 +147,7 @@ function createClickSpy(notifyEvery) {
     return counter % notifyEvery === 0 ? true : false;
   };
 }
-
+// Task-16
 function createSentenceBuilder() {
   const arr = [];
   return function (str) {
@@ -158,13 +159,13 @@ const build = createSentenceBuilder();
 console.log(build("Я")); // "Я"
 console.log(build("вчу")); // "Я вчу"
 console.log(build("javascript")); // "Я вчу javascript"
-
+// Task-17
 function passwordLengthChecker(requiredLength) {
   return function (str) {
     return str.length >= requiredLength;
   };
 }
-
+// Task-18
 function createAdvancedBank(initialBalance) {
   let balance = initialBalance;
   return {
@@ -182,7 +183,7 @@ function createAdvancedBank(initialBalance) {
     },
   };
 }
-
+// Task-19
 function createGuestList() {
   const guests = [];
   return {
@@ -196,7 +197,7 @@ function createGuestList() {
     },
   };
 }
-
+// Task-20
 function createDiscountApplier(discountPercent) {
   return function (arr) {
     return arr.map((el) => el - (el * discountPercent) / 100);
