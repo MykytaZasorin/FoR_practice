@@ -80,3 +80,8 @@ li button:hover {
 body.dark #joke-text {
   color: #ccc;
 }
+
+.closur-text {
+  font-size: 200px;
+  margin-top: 50px;
+}

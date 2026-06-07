@@ -64,3 +64,141 @@ function createStyleWrapper(cssClass) {
 }
 const parg = createStyleWrapper("text-info");
 console.log(parg("Dinner starts at 19.00"));
+
+function createAttemptsLimiter(maxAttempts) {
+  let counter = maxAttempts;
+  return function (password) {
+    const userPassword = "1234";
+    counter--;
+    return counter >= 0 && userPassword === password;
+  };
+}
+const largo = createAttemptsLimiter(4);
+console.log(largo("1234"));
+
+function createTicketGenerator(eventPrefix) {
+  let ticketNumber = 0;
+  return function () {
+    ticketNumber++;
+    return `${eventPrefix}-${ticketNumber}`;
+  };
+}
+const ticket = createTicketGenerator("Paris");
+console.log(ticket());
+console.log(ticket());
+
+function createSimpleBox() {
+  let item = null;
+  return {
+    put(value) {
+      if (!item) {
+        item = value;
+      }
+    },
+    get() {
+      return item;
+    },
+  };
+}
+
+function createToggle() {
+  let isActive = false;
+  return function () {
+    isActive = isActive === false ? true : false;
+    return isActive;
+  };
+}
+const status = createToggle();
+console.log(status());
+console.log(status());
+
+function createRangeLimiter(min, max) {
+  return function (num) {
+    if (num < min) return min;
+    else if (num > max) return max;
+    else return num;
+  };
+}
+const range = createRangeLimiter(5, 10);
+console.log(range(99));
+
+function filterByLength(minLength) {
+  return function (element) {
+    return element.length >= minLength;
+  };
+}
+const words = ["я", "код", "програміст", "js"];
+console.log(words.filter(filterByLength(4))); // ["програміст"]
+
+function createSmartAdder(baseValue) {
+  return function (num) {
+    baseValue += num;
+    return baseValue;
+  };
+}
+const calc = createSmartAdder(10);
+console.log(calc(3));
+
+function createClickSpy(notifyEvery) {
+  let counter = 0;
+  return function () {
+    counter++;
+    return counter % notifyEvery === 0 ? true : false;
+  };
+}
+
+function createSentenceBuilder() {
+  const arr = [];
+  return function (str) {
+    arr.push(str);
+    return arr.join(" ");
+  };
+}
+const build = createSentenceBuilder();
+console.log(build("Я")); // "Я"
+console.log(build("вчу")); // "Я вчу"
+console.log(build("javascript")); // "Я вчу javascript"
+
+function passwordLengthChecker(requiredLength) {
+  return function (str) {
+    return str.length >= requiredLength;
+  };
+}
+
+function createAdvancedBank(initialBalance) {
+  let balance = initialBalance;
+  return {
+    deposit(amount) {
+      balance += amount;
+      return balance;
+    },
+    withdraw(amount) {
+      if (amount <= balance) {
+        balance -= amount;
+        return balance;
+      } else {
+        return `Not enought money`;
+      }
+    },
+  };
+}
+
+function createGuestList() {
+  const guests = [];
+  return {
+    addGuest(name) {
+      if (!guests.includes(name)) {
+        guests.push(name);
+      }
+    },
+    getGuestCount() {
+      return guests.length;
+    },
+  };
+}
+
+function createDiscountApplier(discountPercent) {
+  return function (arr) {
+    return arr.map((el) => el - (el * discountPercent) / 100);
+  };
+}
