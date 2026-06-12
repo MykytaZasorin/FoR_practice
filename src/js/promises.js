@@ -88,7 +88,6 @@ async function getAllDataSafety() {
 }
 
 const ids = [1, 2, 3, 4];
-const ids = [1, 2, 3, 4];
 
 async function processSequentially() {
   for (const id of ids) {
@@ -112,22 +111,6 @@ async function sendData(id) {
 
 processSequentially();
 
-function readFilePromise(path) {
-  return new Promise((resolve, reject) => {
-    fs.readFile(path, (err, data) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(data);
-      }
-    });
-  });
-}
-
-readFilePromise("file.txt")
-  .then((data) => console.log("Проміс повернув дані:", data))
-  .catch((err) => console.error("Сталася помилка:", err));
-
 function fetchWithTimeout(url, timeout) {
   const timeoutPromise = new Promise((_, reject) => {
     setTimeout(() => {
@@ -140,6 +123,142 @@ function fetchWithTimeout(url, timeout) {
   return Promise.race([fetchPromise, timeoutPromise]);
 }
 
-fetchWithTimeout("https://jsonplaceholder.typicode.com/photos", 2000)
+fetchWithTimeout("https://jsonplaceholder.typicode.com/photos/1", 2000)
   .then((data) => console.log("Дані отримано успішно:", data))
   .catch((err) => console.error("Помилка:", err.message));
+
+const myPromise = new Promise((resolve, reject) => {
+  resolve("Hello");
+});
+myPromise.then((result) => console.log(result));
+
+const badPromise = new Promise((resolve, reject) => {
+  reject("Something went wrong");
+});
+badPromise.catch((error) => console.log(error));
+
+function sayHelloAfterDelay() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("Time is out");
+    }, 2000);
+  });
+}
+
+sayHelloAfterDelay().then((result) => console.log(result));
+
+function flipCoin() {
+  return new Promise((resolve, reject) => {
+    const isEagle = Math.random() >= 0.5;
+    if (isEagle) {
+      resolve("Eagl");
+    } else {
+      reject("NotEagle");
+    }
+  });
+}
+
+flipCoin()
+  .then((result) => console.log(result))
+  .catch((error) => console.log(error));
+
+async function getGreeting() {
+  return "Hello";
+}
+
+async function showResult() {
+  const message = await getGreeting();
+  console.log(message);
+}
+
+async function playGame() {
+  try {
+    const result = await flipCoin();
+    console.log(result);
+  } catch (error) {
+    console.log("We lose, cos dropes", error);
+  }
+}
+
+async function getTodo() {
+  try {
+    const response = await fetch(
+      "https://jsonplaceholder.typicode.com/todos/1",
+    );
+    const data = await response.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.log("Сталася помилка, повертаємо дефолтні дані:", error.message);
+    return { title: "Стандартне завдання", completed: false };
+  }
+}
+
+async function getFromTwoUrl() {
+  const response1 = await fetch("https://jsonplaceholder.typicode.com/users/1");
+  const firstData = await response1.json();
+  const user = firstData.id;
+  const response2 = await fetch(
+    `https://jsonplaceholder.typicode.com/posts?userId=${user}`,
+  );
+  const secondData = await response2.json();
+  console.log(secondData);
+  return secondData;
+}
+getFromTwoUrl();
+
+async function getArrData() {
+  const [getUsers, getPosts, getComments] = await Promise.all([
+    fetch("https://jsonplaceholder.typicode.com/users/1"),
+    fetch("https://jsonplaceholder.typicode.com/posts/1"),
+    fetch("https://jsonplaceholder.typicode.com/comments/1"),
+  ]);
+  const users = await getUsers.json();
+  const posts = await getPosts.json();
+  const comments = await getComments.json();
+  const data = [users, posts, comments];
+  return data;
+}
+console.log(await getArrData());
+
+async function fetchRace() {
+  const timeoutPromise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      reject(new Error("Serves is not respound at the time"));
+    }, 3000);
+  });
+  const fetchPromise = await fetch(
+    "https://jsonplaceholder.typicode.com/photos",
+  ).then((res) => res.json());
+
+  try {
+    const whoWin = Promise.race([timeoutPromise, fetchPromise]);
+    console.log("Winner is", whoWin);
+  } catch (er) {
+    console.log("Timeout faster", er.message);
+  }
+}
+
+function showNotification(text) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(text);
+    }, 1500);
+  });
+}
+
+const delayFn = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+async function countToThree() {
+  console.log(1);
+  await delayFn(1000);
+  console.log(2);
+  await delayFn(1000);
+  console.log(3);
+}
+countToThree();
+
+// const fastPromise = Promise.resolve("Fast data");
+// fastPromise.then((result) => console.log(result));
+// const instantError = Promise.reject("Миттєвий вибух");
+// instantError.catch((error) => console.log(error));
