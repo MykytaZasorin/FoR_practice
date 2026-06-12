@@ -7,6 +7,7 @@ function countDown(n) {
 
   return countDown(n - 1);
 }
+countDown(2);
 // Task-2
 function countUp(n) {
   if (n < 1) {
@@ -15,6 +16,7 @@ function countUp(n) {
   countUp(n - 1);
   console.log(n);
 }
+countUp(6);
 // Task-3
 function factorial(n) {
   if (n === 1 || n === 0) {
@@ -22,6 +24,7 @@ function factorial(n) {
   }
   return n * factorial(n - 1);
 }
+factorial(4);
 // Task-4
 function sumTo(n) {
   if (n === 1) {
