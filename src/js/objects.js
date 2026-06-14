@@ -67,3 +67,43 @@ const secretObj = {
   title: "Звичайний текст",
 };
 console.log(secretObj[mySecretKey]);
+
+const users = [
+  { name: "Оля", role: "admin" },
+  { name: "Ігор", role: "user" },
+  { name: "Андрій", role: "admin" },
+  { name: "Олена", role: "guest" },
+];
+
+function groupByRole(array) {
+  const object = {};
+
+  for (let user of array) {
+    if (!object[user.role]) {
+      object[user.role] = [];
+    }
+    object[user.role].push(user.name);
+  }
+
+  return object;
+}
+console.log(groupByRole(users));
+
+function updateProfile(oldData, newData, allowedKeys) {
+  const updatedProfile = { ...oldData };
+
+  for (let key of allowedKeys) {
+    if (newData[key] !== undefined) {
+      updatedProfile[key] = newData[key];
+    }
+  }
+
+  return updatedProfile;
+}
+
+const oldUser = { id: 1, name: "Микита", bio: "Привіт", role: "user" };
+const hackerChanges = { bio: "Нова біографія", role: "admin" };
+const allowed = ["bio", "avatar"];
+
+console.log(updateProfile(oldUser, hackerChanges, allowed));
+// addEventListene
