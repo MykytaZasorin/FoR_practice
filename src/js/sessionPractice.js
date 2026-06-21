@@ -181,3 +181,65 @@ function countLetters(str) {
   return count;
 }
 console.log("Task 19 -", countLetters("abrakadabra"));
+
+function getMinMax(arr) {
+  let min = arr[0];
+  let max = arr[0];
+  for (let num of arr) {
+    if (num > max) {
+      max = num;
+    }
+    if (num < min) {
+      min = num;
+    }
+  }
+  return { min, max };
+}
+console.log("Task 20 -", getMinMax([1, 2, 3, 4, 5]));
+
+function delDuplicates(arr) {
+  const copy = [];
+  for (const el of arr) {
+    if (!copy.includes(el)) {
+      copy.push(el);
+    }
+  }
+  return copy;
+}
+console.log("Task 21 -", delDuplicates([1, 2, 2, 3, 4, 4, 5]));
+
+function getSameElements(arr1, arr2) {
+  const newArr = [...arr1];
+  for (let elem of arr2) {
+    if (!newArr.includes(elem)) {
+      newArr.push(elem);
+    }
+  }
+  return newArr;
+}
+console.log(
+  "Task 22:",
+  getSameElements(["dog", "cat", "duck", "horse"], ["cat", "lama", "elephant"]),
+);
+
+function changePlaces(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    const randomIndex = Math.floor(Math.random() * arr.length);
+
+    const temp = arr[i];
+    arr[i] = arr[randomIndex];
+    arr[randomIndex] = temp;
+  }
+
+  return arr;
+}
+console.log("Task 23 -", changePlaces([1, 2, 3, 4, 5]));
+
+function chunkArray(arr, size) {
+  const result = [];
+  for (let i = 0; i < arr.length; i += size) {
+    result.push(arr.slice(i, i + size));
+  }
+  return result;
+}
+console.log("Task 24 -", chunkArray([1, 2, 3, 4, 5], 2));
