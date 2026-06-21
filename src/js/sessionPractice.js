@@ -345,3 +345,50 @@ function sumAll(...args) {
   return total;
 }
 console.log("Task 33:", sumAll(1, 5, 2, 6, 7));
+
+function createCounter() {
+  let total = 0;
+  return function () {
+    total++;
+    return total;
+  };
+}
+
+function urlGenerator(domain) {
+  return function (path) {
+    return "https://" + path + "." + domain;
+  };
+}
+const comUrl = urlGenerator("com");
+console.log("Task 34:", comUrl("google"));
+
+const user1 = { name: "Alex" };
+function sayHi() {
+  return "Hi, " + this.name;
+}
+const bindMethod = sayHi.bind(user1);
+console.log("Task-35", bindMethod(), sayHi.call(user1), sayHi.apply(user1));
+
+const obj = {
+  name: "Terminal",
+  start() {
+    setTimeout(() => {
+      console.log(this.name);
+    }, 100);
+  },
+};
+console.log("Task 36:");
+obj.start();
+
+function cached(fn) {
+  let cache = null;
+  let isCached = false;
+
+  return function () {
+    if (!isCached) {
+      cache = fn();
+      isCached = true;
+    }
+    return cache;
+  };
+}
