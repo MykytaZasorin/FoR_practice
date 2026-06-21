@@ -307,3 +307,41 @@ function checkNumbersOfArray(arr) {
   return arr.some((el) => el % 10 === 0);
 }
 console.log("Task 29:", checkNumbersOfArray([1, 3, 4, 6, 7, 8, 10]));
+
+function isEmpty(obj) {
+  return Object.keys(obj).length === 0;
+}
+console.log("Task 30:", isEmpty({ key: "value" }));
+
+function getClone(obj) {
+  const data = JSON.stringify(obj);
+  const clone = JSON.parse(data);
+  return clone;
+}
+
+const user = { id: 1, info: { name: "John", skills: ["JS", "React"] } };
+const {
+  info: {
+    name,
+    skills: [primarySkill],
+  },
+} = user;
+console.log("Task 31:", name, primarySkill);
+
+function mergeObjects(obj1, obj2) {
+  const newObj = { ...obj1, ...obj2 };
+  return newObj;
+}
+console.log(
+  "Task 32:",
+  mergeObjects({ name: "Ivan", age: 30 }, { age: 25, city: "Kyiv" }),
+);
+
+function sumAll(...args) {
+  let total = 0;
+  for (let num of args) {
+    total += num;
+  }
+  return total;
+}
+console.log("Task 33:", sumAll(1, 5, 2, 6, 7));
