@@ -377,7 +377,6 @@ const obj = {
     }, 100);
   },
 };
-console.log("Task 36:");
 obj.start();
 
 function cached(fn) {
@@ -391,4 +390,75 @@ function cached(fn) {
     }
     return cache;
   };
+}
+
+function delay(ms) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve();
+    }, ms);
+  });
+}
+delay(2000).then(() => console.log("Task 37 - Done!"));
+
+async function makeFetch() {
+  try {
+    const response = await fetch(
+      "https://jsonplaceholder.typicode.com/todos/1",
+    );
+    if (!response.ok) {
+      throw new Error("404");
+    }
+    const data = await response.json();
+    console.log(data.title);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+makeFetch();
+
+// async function problemFetch() {
+//   try {
+//     const response = await fetch("https://jsonpSAholder.typicode.com/tADAos/1");
+//     const data = await response.json();
+//     console.log(data.title);
+//     return data;
+//   } catch (error) {
+//     console.log("Invalid adress");
+//   }
+// }
+// problemFetch();
+
+async function getAllData() {
+  try {
+    const [getUsers, getPosts, getTodos] = await Promise.all([
+      fetch("https://jsonplaceholder.typicode.com/users"),
+      fetch("https://jsonplaceholder.typicode.com/posts"),
+      fetch("https://jsonplaceholder.typicode.com/todos"),
+    ]);
+    if (!getUsers.ok || !getPosts.ok || !getTodos.ok) {
+      throw new Error("404");
+    }
+    const users = await getUsers.json();
+    const posts = await getPosts.json();
+    const todos = await getTodos.json();
+
+    const data = [users, posts, todos];
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+getAllData();
+
+async function makeRaceFetch(url) {
+  const timePromise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      reject(new Error("Timeout is over"));
+    }, 3000);
+  });
+  const response = await Promise.race([fetch(`${url}`), timePromise]);
+  return response.json();
 }
