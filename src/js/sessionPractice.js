@@ -127,3 +127,57 @@ function checkArr(arr) {
   return -1;
 }
 console.log("Task 14 -", checkArr([1, 2, 3, 4, -2]));
+
+function checkPalion(str) {
+  let reversed = "";
+  for (let i = str.length - 1; i >= 0; i--) {
+    reversed += str[i];
+  }
+
+  return str.toLowerCase() === reversed.toLowerCase()
+    ? "Is paliondrom"
+    : "Not a paliondrom";
+}
+console.log("Task 15 -", checkPalion("шалаш"));
+
+function truncate(str, maxlength) {
+  if (str.length > maxlength) {
+    const newText = str.slice(0, maxlength).concat("...");
+    return newText;
+  }
+  return str;
+}
+console.log("Task 16 -", truncate("Mistake", 3));
+
+function getFormat(str) {
+  const index = str.indexOf(".");
+  return str.slice(index + 1);
+}
+console.log("Task 17 -", getFormat("aria.png"));
+
+function toCamelCase(str) {
+  const words = str.split("_");
+  const newArr = words.map((word, i) =>
+    i === 0 ? word : word[0].toUpperCase() + word.slice(1),
+  );
+
+  return newArr.join("");
+}
+console.log("Task 18 -", toCamelCase("hello_world_style"));
+
+function countLetters(str) {
+  let count = 0;
+  for (let i = 0; i <= str.length; i++) {
+    if (
+      str[i] === "a" ||
+      str[i] === "e" ||
+      str[i] === "i" ||
+      str[i] === "o" ||
+      str[i] === "u"
+    ) {
+      count++;
+    }
+  }
+  return count;
+}
+console.log("Task 19 -", countLetters("abrakadabra"));
