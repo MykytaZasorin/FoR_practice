@@ -243,3 +243,67 @@ function chunkArray(arr, size) {
   return result;
 }
 console.log("Task 24 -", chunkArray([1, 2, 3, 4, 5], 2));
+
+function arrGetNames(arr) {
+  return arr.map((el) => el.name);
+}
+console.log(
+  "Task 25 -",
+  arrGetNames([
+    { id: 1, name: "A" },
+    { id: 2, name: "B" },
+  ]),
+);
+
+function checkUserAge(arr) {
+  return arr.filter((el) => el.age >= 18);
+}
+console.log(
+  "Task 26 -",
+  checkUserAge([
+    { name: "Ivan", age: 17 },
+    { name: "Olga", age: 23 },
+  ]),
+);
+
+function getTotalFromArr(arr) {
+  return arr.reduce((acc, el) => (acc += el), 0);
+}
+console.log("Task 27 -", getTotalFromArr([1, 3, 5, 6, 7, 8]));
+
+const products = [
+  {
+    name: "Book",
+    price: 20,
+    category: "books",
+  },
+  {
+    name: "T-Shirt",
+    price: 30,
+    category: "clothes",
+  },
+  {
+    name: "Laptop",
+    price: 1200,
+    category: "electronics",
+  },
+  {
+    name: "Headphones",
+    price: 150,
+    category: "electronics",
+  },
+  {
+    name: "Coffee Mug",
+    price: 15,
+    category: "home",
+  },
+];
+function findMostExpensive(arr) {
+  return arr.find((el) => el.category === "electronics" && el.price > 500);
+}
+console.log("Task 28:", findMostExpensive(products));
+
+function checkNumbersOfArray(arr) {
+  return arr.some((el) => el % 10 === 0);
+}
+console.log("Task 29:", checkNumbersOfArray([1, 3, 4, 6, 7, 8, 10]));
