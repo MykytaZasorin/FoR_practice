@@ -462,3 +462,65 @@ async function makeRaceFetch(url) {
   const response = await Promise.race([fetch(`${url}`), timePromise]);
   return response.json();
 }
+
+const colorBtnElem = document.querySelector("#body-color");
+function getRandomColor() {
+  return (
+    "#" +
+    Math.floor(Math.random() * 16777215)
+      .toString(16)
+      .padStart(6, "0")
+  );
+}
+colorBtnElem.addEventListener("click", () => {
+  document.body.style.backgroundColor = getRandomColor();
+});
+
+const listStrElem = document.querySelector("#str-list");
+function makeLiElems(arr) {
+  for (let el of arr) {
+    const li = document.createElement("li");
+    li.textContent = el;
+    listStrElem.append(li);
+  }
+}
+makeLiElems(["One", "Two", "Three", "Four", "Five"]);
+
+const toggleBtnElem = document.querySelector("#toggler");
+const toggleTextElem = document.querySelector("#toggle-text");
+toggleBtnElem.addEventListener("click", () => {
+  if (toggleTextElem.classList.contains("hidden")) {
+    toggleTextElem.classList.remove("hidden");
+    toggleTextElem.style.display = "block";
+  } else {
+    toggleTextElem.classList.add("hidden");
+    toggleTextElem.style.display = "none";
+  }
+  //   toggleTextElem.classList.toggle("hidden");
+});
+
+const markerListElem = document.querySelector("#marker-list");
+markerListElem.addEventListener("click", (e) => {
+  if (e.target.tagName !== "LI") return;
+  const li = markerListElem.querySelectorAll("li");
+  const liElems = [...li];
+  const activeLi = liElems.find((el) => el.classList.contains("active"));
+  const currentLi = e.target;
+
+  if (activeLi) {
+    activeLi.classList.remove("active");
+    activeLi.style.backgroundColor = "";
+  }
+
+  currentLi.classList.add("active");
+  currentLi.style.backgroundColor = "red";
+});
+
+const formElem = document.querySelector(".form");
+formElem.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const value = e.target.username.value;
+  if (!value) alert("Input is empty!!!");
+  console.log(value);
+  formElem.reset();
+});
