@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>train</title>
+    <link rel="stylesheet" href="/src/css/style.css" />
+  </head>
+  <body>
+    <ul id="products-list"></ul>
+    <textarea id="note-pad" placeholder="Пишіть свої нотатки тут..."></textarea>
+    <div class="tabs-controls">
+      <button data-target="tab-1">Про нас</button>
+      <button data-target="tab-2">Контакти</button>
+    </div>
+
+    <div id="tab-1" class="tab-content">Ми — крута компанія.</div>
+    <div id="tab-2" class="tab-content" style="display: none">
+      Наш email: test@test.com
+    </div>
+    <form id="register-form">
+      <input type="password" id="pass" placeholder="Пароль" />
+      <input
+        type="password"
+        id="confirm-pass"
+        placeholder="Підтвердіть пароль"
+      />
+      <button type="submit">Зареєструватися</button>
+    </form>
+    <p id="auth-error" style="color: red"></p>
+    <div>
+      <span id="timer-display">0</span> секунд
+      <button id="start-timer">Старт</button>
+      <button id="stop-timer">Стоп</button>
+    </div>
+    <script type="module" src="/src/js/practiceTwo.js"></script>
+  </body>
+</html>

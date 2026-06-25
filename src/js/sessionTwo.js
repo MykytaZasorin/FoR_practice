@@ -36,7 +36,6 @@ const pargErrorMessageElem = document.querySelector("#error");
 loginFormElem.addEventListener("submit", (e) => {
   e.preventDefault();
   const value = loginInpElem.value;
-  if (!value) return;
   if (!value.includes("@")) {
     pargErrorMessageElem.textContent = "Invalid email";
   } else {
@@ -76,7 +75,10 @@ const todoListElem = document.querySelector("#todo-list");
 
 todoBtnElem.addEventListener("click", () => {
   const todoText = todoInpElem.value.trim();
-  if (todoText.length < 5) return;
+  if (todoText.length < 5) {
+    alert("Value must be > 5 symbols");
+    return;
+  }
   const li = document.createElement("li");
   li.textContent = todoText;
   todoListElem.append(li);
