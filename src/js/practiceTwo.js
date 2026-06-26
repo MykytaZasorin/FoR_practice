@@ -153,3 +153,10 @@ function formatUserFormat(oldUser) {
   return newObj;
 }
 console.log(formatUserFormat(oldUser));
+
+const taskListElem = document.querySelector("#task-list");
+taskListElem.addEventListener("click", (e) => {
+  if (e.target.tagName !== "BUTTON") return;
+  const li = e.target.closest("li");
+  taskListElem.removeChild(li);
+});
