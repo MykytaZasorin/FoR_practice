@@ -34,6 +34,36 @@
       <button id="start-timer">Старт</button>
       <button id="stop-timer">Стоп</button>
     </div>
+    <div class="gallery">
+      <img id="main-img" src="https://picsum.photos/id/10/300/200" alt="Main" />
+      <div class="thumbnails">
+        <button
+          class="thumb-btn"
+          data-src="https://picsum.photos/id/20/300/200"
+        >
+          Фото 1
+        </button>
+        <button
+          class="thumb-btn"
+          data-src="https://picsum.photos/id/30/300/200"
+        >
+          Фото 2
+        </button>
+      </div>
+    </div>
+    <button id="load-todo">Завантажити завдання</button>
+    <p id="todo-title">Тут буде заголовок...</p>
+    <div class="filters">
+      <button data-filter="all">Усі</button>
+      <button data-filter="tech">Гаджети</button>
+      <button data-filter="clothing">Одяг</button>
+    </div>
+
+    <div class="items">
+      <div class="item-card" data-category="tech">Телефон</div>
+      <div class="item-card" data-category="clothing">Футболка</div>
+      <div class="item-card" data-category="tech">Ноутбук</div>
+    </div>
     <script type="module" src="/src/js/practiceTwo.js"></script>
   </body>
 </html>

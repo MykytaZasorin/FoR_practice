@@ -109,3 +109,7 @@ body.dark #joke-text {
 #message {
   margin-top: 20px;
 }
+
+.hidden {
+  display: none;
+}
