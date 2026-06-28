@@ -8,6 +8,21 @@
     <link rel="stylesheet" href="/src/css/style.css" />
   </head>
   <body>
+    <div
+      id="progress-bar"
+      style="
+        width: 0%;
+        height: 5px;
+        background: green;
+        position: fixed;
+        top: 0;
+        left: 0;
+      "
+    ></div>
+
+    <div style="padding-top: 50px">
+      <p>Скрольте сторінку вниз, щоб побачити роботу індикатора...</p>
+    </div>
     <ul id="products-list"></ul>
     <textarea id="note-pad" placeholder="Пишіть свої нотатки тут..."></textarea>
     <div class="tabs-controls">
@@ -75,6 +90,7 @@
         Вчити JS <button class="delete-btn">Видалити</button>
       </li>
     </ul>
+
     <script type="module" src="/src/js/practiceTwo.js"></script>
   </body>
 </html>

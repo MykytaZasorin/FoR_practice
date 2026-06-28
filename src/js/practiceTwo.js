@@ -135,8 +135,6 @@ filtersElem.addEventListener("click", (e) => {
     const show = activeBtn === "all" || activeBtn === el.dataset.category;
     el.classList.toggle("hidden", !show);
   });
-
-  console.log(activeBtn);
 });
 
 const oldUser = {
@@ -160,3 +158,57 @@ taskListElem.addEventListener("click", (e) => {
   const li = e.target.closest("li");
   taskListElem.removeChild(li);
 });
+
+function createIdGenerator() {
+  let total = 0;
+  return function () {
+    total++;
+    return total;
+  };
+}
+
+const generateId = createIdGenerator();
+console.log(generateId()); // 1
+console.log(generateId()); // 2
+console.log(generateId()); // 3
+
+const library = [
+  { id: 101, title: "Кобзар", isRead: false },
+  { id: 102, title: "Гаррі Поттер", isRead: false },
+  { id: 103, title: "1984", isRead: true },
+];
+
+function markAsRead(books, bookId) {
+  const search = books.find((el) => el.id === bookId);
+  search.isRead = true;
+  return books;
+}
+
+const progressDiv = document.querySelector("#progress-bar");
+
+window.addEventListener("scroll", () => {
+  const scrolled = window.scrollY;
+  const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+
+  const percent = (scrolled / maxScroll) * 100;
+
+  progressDiv.style.width = `${percent}%`;
+});
+
+const students = [
+  { name: "Олег", faculty: "IT" },
+  { name: "Ганна", faculty: "Design" },
+  { name: "Ігор", faculty: "IT" },
+  { name: "Марта", faculty: "Design" },
+];
+
+function groupByFaculty(students) {
+  return students.reduce((acc, el) => {
+    if (!acc[el.faculty]) {
+      acc[el.faculty] = [];
+    }
+    acc[el.faculty].push(el);
+    return acc;
+  }, {});
+}
+console.log(groupByFaculty(students));
