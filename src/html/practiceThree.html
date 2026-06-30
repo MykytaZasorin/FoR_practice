@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>train</title>
+    <link rel="stylesheet" href="/src/css/style.css" />
+  </head>
+  <body>
+    <div class="counter-box">
+      <span id="counter-value">0</span>
+      <button id="increment-btn">Збільшити</button>
+    </div>
+    <button id="theme-toggle">Увімкнути темну тему</button>
+    <div class="dropdown-wrapper">
+      <button id="toggle-content-btn">Показати деталі</button>
+      <div id="content-text" class="content">Прихований секретний текст!</div>
+    </div>
+    <form id="login-form" onsubmit="event.preventDefault()">
+      <input type="text" id="username-input" placeholder="Введіть ваше ім'я" />
+      <button id="submit-btn">Відправити</button>
+      <p id="error-message" style="color: red; font-size: 14px"></p>
+    </form>
+    <ul class="todo-list">
+      <li class="todo-item">Купити каву</li>
+      <li class="todo-item">Повторити JS</li>
+      <li class="todo-item">Зробити домашку</li>
+    </ul>
+    <script type="module" src="/src/js/practiceThree.js"></script>
+  </body>
+</html>
