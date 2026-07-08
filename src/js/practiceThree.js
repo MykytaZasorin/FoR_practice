@@ -44,3 +44,22 @@ todosListElem.addEventListener("click", (e) => {
   if (!selectedTodo) return;
   selectedTodo.classList.toggle("completed");
 });
+
+const psevdoFormElem = document.querySelector(".todo-control");
+const dynamicListElem = document.querySelector("#dynamic-todo-list");
+
+psevdoFormElem.addEventListener("click", (e) => {
+  const inpElem = psevdoFormElem.querySelector("#new-todo-input");
+  const text = inpElem.value.trim();
+  if (e.target.tagName !== "BUTTON" && text.length === 0) return;
+  const li = document.createElement("li");
+  li.textContent = text;
+  dynamicListElem.append(li);
+  inpElem.value = "";
+});
+
+const delDeviceBtnElem = document.querySelector(".delete-card-btn");
+delDeviceBtnElem.addEventListener("click", (e) => {
+  const delElem = e.target.closest("div");
+  document.body.removeChild(delElem);
+});
