@@ -191,3 +191,64 @@ h3 {
   border-radius: 4px;
   cursor: pointer;
 }
+
+.plans-container {
+  font-family: sans-serif;
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+}
+.plan-btn {
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  background: #34495e;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+#price-display {
+  font-family: sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.users-grid {
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 20px;
+}
+
+.user-user-card {
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 6px;
+  background: #fafafa;
+  min-width: 120px;
+  text-align: center;
+}
+
+.search-box {
+  font-family: sans-serif;
+  margin: 20px;
+  width: 250px;
+}
+#search-food {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+#food-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+#food-list li {
+  padding: 8px;
+  border-bottom: 1px solid #eee;
+}

@@ -51,7 +51,7 @@ const dynamicListElem = document.querySelector("#dynamic-todo-list");
 psevdoFormElem.addEventListener("click", (e) => {
   const inpElem = psevdoFormElem.querySelector("#new-todo-input");
   const text = inpElem.value.trim();
-  if (e.target.tagName !== "BUTTON" && text.length === 0) return;
+  if (e.target.tagName !== "BUTTON" || text.length === 0) return;
   const li = document.createElement("li");
   li.textContent = text;
   dynamicListElem.append(li);
@@ -61,5 +61,46 @@ psevdoFormElem.addEventListener("click", (e) => {
 const delDeviceBtnElem = document.querySelector(".delete-card-btn");
 delDeviceBtnElem.addEventListener("click", (e) => {
   const delElem = e.target.closest("div");
-  document.body.removeChild(delElem);
+  delElem.remove();
+});
+
+const planDivElem = document.querySelector(".plans-container");
+const priceDisplayParg = document.querySelector("#price-display");
+
+planDivElem.addEventListener("click", (e) => {
+  if (!button) return;
+  const price = e.target.dataset.price;
+  priceDisplayParg.textContent = `Cost is ${price}`;
+});
+
+const users = [
+  { id: 1, name: "Олена", role: "Admin" },
+  { id: 2, name: "Ігор", role: "User" },
+  { id: 3, name: "Анна", role: "Moderator" },
+];
+
+const contentContainerDivElem = document.querySelector(".users-grid");
+
+const markupFunc = (arr) => {
+  return arr
+    .map((el) => {
+      return `<li>UserId: ${el.id} Name: ${el.name}, Role: ${el.role}</li>`;
+    })
+    .join(" ");
+};
+contentContainerDivElem.insertAdjacentHTML("afterbegin", markupFunc(users));
+
+const foodSearchInp = document.querySelector("#search-food");
+const foodListElem = document.querySelector("#food-list");
+
+foodSearchInp.addEventListener("input", (e) => {
+  const text = foodSearchInp.value.toLowerCase().trim();
+  const menuItems = foodListElem.querySelectorAll("li");
+  menuItems.forEach((el) => {
+    if (el.textContent.toLowerCase().trim().includes(text)) {
+      el.style.display = "block";
+    } else {
+      el.style.display = "none";
+    }
+  });
 });
