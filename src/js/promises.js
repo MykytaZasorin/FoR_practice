@@ -1,264 +1,119 @@
-function delay(ms) {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(`Done`);
-    }, ms);
-  });
-}
-delay(2000).then((message) => console.log(message));
+const loadUsersBtnElem = document.querySelector("#load-users-btn");
+const usersListElem = document.querySelector("#users-list");
 
-function randomPromise() {
-  let number = Math.random();
-  return new Promise((resolve, reject) => {
-    if (number >= 0.5) {
-      resolve("Success");
-    } else {
-      reject(new Error("Failed"));
+const fetchUsers = async () => {
+  try {
+    const response = await fetch("https://jsonplaceholder.typicode.com/users");
+    if (!response.ok) {
+      throw new Error("404");
     }
-  });
-}
-randomPromise()
-  .then((result) => {
-    console.log("Success", result);
-  })
-  .catch((error) => {
-    console.log("Error", error);
-  });
-
-function numbers(num) {
-  return new Promise((resolve) => {
-    resolve(num);
-  })
-    .then((num) => num * 2)
-    .then((result) => result + 5)
-    .then((result) => result * result)
-    .then((result) => console.log(result));
-}
-numbers(2);
-async function numbersNew(num) {
-  try {
-    const first = num * 2;
-    const second = first + 5;
-    const final = second * second;
-    return final;
-  } catch (error) {
-    console.log("NaN");
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    console.log(err);
   }
-}
-numbersNew(2).then((result) => console.log("Результат async/await:", result));
-numbersNew(3).then((result) => console.log("Результат для 3:", result));
+};
 
-async function getData() {
-  try {
-    const response = await Promise.all([
-      fetchUsers(),
-      fetchPosts(),
-      fetchComments(),
-    ]);
-    return response;
-  } catch (er) {
-    console.log(er);
-  }
-}
+const usersMarkup = (arr) => {
+  return arr
+    .map((el) => {
+      return `<li>${el.name}</li>`;
+    })
+    .join("");
+};
 
-async function getFastestData() {
-  try {
-    const fastestResponse = await Promise.race([
-      fetchUsers(),
-      fetchPosts(),
-      fetchComments(),
-    ]);
-    return fastestResponse;
-  } catch (er) {
-    console.log(er);
-  }
-}
-
-async function getAllDataSafety() {
-  try {
-    const results = await Promise.allSettled([
-      fetchUsers(),
-      fetchPosts(),
-      fetchComments(),
-    ]);
-    return fastestResponse;
-  } catch (er) {
-    console.log(er);
-  }
-}
-
-const ids = [1, 2, 3, 4];
-
-async function processSequentially() {
-  for (const id of ids) {
-    console.log(`Почали відправку для ID: ${id}`);
-    const result = await sendData(id);
-    console.log(`Успішно завершено для ID: ${id}`);
-  }
-}
-
-async function sendData(id) {
-  const response = await fetch(
-    `https://jsonplaceholder.typicode.com/posts/${id}`,
-    {
-      method: "PUT",
-      body: JSON.stringify({ title: "newData" }),
-      headers: { "Content-type": "application/json; charset=UTF-8" },
-    },
-  );
-  return response.json();
-}
-
-processSequentially();
-
-function fetchWithTimeout(url, timeout) {
-  const timeoutPromise = new Promise((_, reject) => {
-    setTimeout(() => {
-      reject(new Error("Timeout Error"));
-    }, timeout);
-  });
-
-  const fetchPromise = fetch(url).then((response) => response.json());
-
-  return Promise.race([fetchPromise, timeoutPromise]);
-}
-
-fetchWithTimeout("https://jsonplaceholder.typicode.com/photos/1", 2000)
-  .then((data) => console.log("Дані отримано успішно:", data))
-  .catch((err) => console.error("Помилка:", err.message));
-
-const myPromise = new Promise((resolve, reject) => {
-  resolve("Hello");
+loadUsersBtnElem.addEventListener("click", async (e) => {
+  usersListElem.innerHTML = "";
+  const users = await fetchUsers();
+  usersListElem.insertAdjacentHTML("afterbegin", usersMarkup(users));
 });
-myPromise.then((result) => console.log(result));
 
-const badPromise = new Promise((resolve, reject) => {
-  reject("Something went wrong");
-});
-badPromise.catch((error) => console.log(error));
+const getPostBtnElem = document.querySelector("#get-post-btn");
+const loaderElem = document.querySelector("#loader");
+const postTitleElem = document.querySelector("#post-title");
+const postBodyElem = document.querySelector("#post-body");
 
-function sayHelloAfterDelay() {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve("Time is out");
-    }, 2000);
-  });
-}
-
-sayHelloAfterDelay().then((result) => console.log(result));
-
-function flipCoin() {
-  return new Promise((resolve, reject) => {
-    const isEagle = Math.random() >= 0.5;
-    if (isEagle) {
-      resolve("Eagl");
-    } else {
-      reject("NotEagle");
-    }
-  });
-}
-
-flipCoin()
-  .then((result) => console.log(result))
-  .catch((error) => console.log(error));
-
-async function getGreeting() {
-  return "Hello";
-}
-
-async function showResult() {
-  const message = await getGreeting();
-  console.log(message);
-}
-
-async function playGame() {
-  try {
-    const result = await flipCoin();
-    console.log(result);
-  } catch (error) {
-    console.log("We lose, cos dropes", error);
-  }
-}
-
-async function getTodo() {
+const fetchUserPost = async () => {
   try {
     const response = await fetch(
-      "https://jsonplaceholder.typicode.com/todos/1",
+      "https://jsonplaceholder.typicode.com/posts/1",
     );
+    if (!response.ok) {
+      throw new Error("404");
+    }
     const data = await response.json();
-    console.log(data);
     return data;
-  } catch (error) {
-    console.log("Сталася помилка, повертаємо дефолтні дані:", error.message);
-    return { title: "Стандартне завдання", completed: false };
+    console.log(data);
+  } catch (err) {
+    console.log(err);
   }
-}
+};
 
-async function getFromTwoUrl() {
-  const response1 = await fetch("https://jsonplaceholder.typicode.com/users/1");
-  const firstData = await response1.json();
-  const user = firstData.id;
-  const response2 = await fetch(
-    `https://jsonplaceholder.typicode.com/posts?userId=${user}`,
-  );
-  const secondData = await response2.json();
-  console.log(secondData);
-  return secondData;
-}
-getFromTwoUrl();
+getPostBtnElem.addEventListener("click", async () => {
+  loaderElem.classList.remove("hidden");
+  const post = await fetchUserPost();
+  if (!post) {
+    postTitleElem.textContent = "Error";
+    loaderElem.classList.add("hidden");
+  }
+  loaderElem.classList.add("hidden");
+  const { title, body } = post;
+  postTitleElem.textContent = title;
+  postBodyElem.textContent = body;
+});
 
-async function getArrData() {
-  const [getUsers, getPosts, getComments] = await Promise.all([
-    fetch("https://jsonplaceholder.typicode.com/users/1"),
-    fetch("https://jsonplaceholder.typicode.com/posts/1"),
-    fetch("https://jsonplaceholder.typicode.com/comments/1"),
-  ]);
-  const users = await getUsers.json();
-  const posts = await getPosts.json();
-  const comments = await getComments.json();
-  const data = [users, posts, comments];
-  return data;
-}
-console.log(await getArrData());
+const fakeUrlBtn = document.querySelector("#bad-request-btn");
+const errMessageElem = document.querySelector("#error-alert");
 
-async function fetchRace() {
-  const timeoutPromise = new Promise((resolve, reject) => {
-    setTimeout(() => {
-      reject(new Error("Serves is not respound at the time"));
-    }, 3000);
-  });
-  const fetchPromise = await fetch(
-    "https://jsonplaceholder.typicode.com/photos",
-  ).then((res) => res.json());
-
+const fetchWrongUrl = async () => {
   try {
-    const whoWin = Promise.race([timeoutPromise, fetchPromise]);
-    console.log("Winner is", whoWin);
-  } catch (er) {
-    console.log("Timeout faster", er.message);
+    const response = await fetch(
+      "https://jsonplaceholder.typicode.com/invalid-url-here",
+    );
+    if (!response.ok) {
+      errMessageElem.textContent = "Something went wrong";
+      return;
+    }
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    errMessageElem.textContent = `Something went wrong, ${err}`;
   }
-}
+};
 
-function showNotification(text) {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(text);
-    }, 1500);
-  });
-}
+fakeUrlBtn.addEventListener("click", async () => {
+  await fetchWrongUrl();
+});
 
-const delayFn = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const postFormElem = document.querySelector("#post-form");
+const postResultMessage = document.querySelector("#result-message");
 
-async function countToThree() {
-  console.log(1);
-  await delayFn(1000);
-  console.log(2);
-  await delayFn(1000);
-  console.log(3);
-}
-countToThree();
+const fetchNewPost = async (obj) => {
+  try {
+    const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(obj),
+    });
+    if (!response.ok) {
+      throw new Error("404");
+    }
+    const message = await response.json();
+    console.log(`Post was successfully created with ID:${response.status}`);
+  } catch (err) {
+    console.log(err);
+  }
+};
 
-// const fastPromise = Promise.resolve("Fast data");
-// fastPromise.then((result) => console.log(result));
-// const instantError = Promise.reject("Миттєвий вибух");
-// instantError.catch((error) => console.log(error));
+postFormElem.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const title = postFormElem.querySelector("#title-input");
+  const body = postFormElem.querySelector("#body-input");
+  if (title.value.length < 5 || body.value.length < 5) {
+    return;
+  }
+  const data = { title: title.value, body: body.value };
+  fetchNewPost(data);
+});

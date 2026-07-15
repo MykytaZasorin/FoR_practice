@@ -8,8 +8,31 @@
     <link rel="stylesheet" href="/src/css/style.css" />
   </head>
   <body>
-    <a href="/index.html">Go to main</a>
-    <p class="closur-text">PROMISES + FETCHS</p>
+    <a class="back-link" href="/index.html">Go to main</a>
+    <button id="load-users-btn">Завантажити користувачів</button>
+    <ul id="users-list"></ul>
+    <button id="get-post-btn">Отримати пост</button>
+    <div id="loader" class="hidden">Завантаження...</div>
+    <div id="post-container">
+      <h3 id="post-title"></h3>
+      <p id="post-body"></p>
+    </div>
+    <button id="bad-request-btn">Зробити невдалий запит</button>
+    <div
+      id="error-alert"
+      style="color: red; font-weight: bold; margin-top: 15px"
+    ></div>
+    <form id="post-form">
+      <input
+        type="text"
+        id="title-input"
+        placeholder="Заголовок поста"
+        required
+      />
+      <textarea id="body-input" placeholder="Текст поста" required></textarea>
+      <button type="submit">Створити пост</button>
+    </form>
+    <p id="result-message"></p>
     <script type="module" src="/src/js/promises.js"></script>
   </body>
 </html>
