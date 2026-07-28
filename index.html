@@ -7,5 +7,20 @@
     <title>train</title>
     <link rel="stylesheet" href="./src/css/style.css" />
   </head>
-  <body></body>
+  <body>
+    <button id="theme-btn">Переключити тему</button>
+    <textarea
+      id="note-input"
+      placeholder="Напишіть щось... воно збережеться автоматично"
+    ></textarea>
+
+    <div class="todo-app">
+      <input type="text" id="todo-in" placeholder="Нове завдання" />
+      <button id="add-btn">Додати</button>
+      <button id="clear-btn">Очистити все</button>
+      <ul id="todo-ul"></ul>
+    </div>
+
+    <script type="module" src="/main.js"></script>
+  </body>
 </html>
