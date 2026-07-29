@@ -58,3 +58,41 @@ clearBtnElem.addEventListener("click", () => {
   todosData = [];
   listElem.innerHTML = "";
 });
+
+let visitedCount = localStorage.getItem("visit_count") || 0;
+const counterVisitElem = document.querySelector("#counter-text");
+
+document.addEventListener("DOMContentLoaded", () => {
+  visitedCount++;
+  localStorage.setItem("visit_count", visitedCount);
+  counterVisitElem.textContent = `You visited this site: ${visitedCount} times`;
+});
+
+const cartDivElems = document.querySelector(".products-list");
+const cartCountElem = document.querySelector("#cart-count");
+const cartSummaryElem = document.querySelector("#cart-sum");
+const cartProducts = JSON.parse(localStorage.getItem("cart")) || [];
+
+function getTotalSum(arr) {
+  return arr.reduce((acc, el) => (acc += el.price), 0);
+}
+
+cartSummaryElem.textContent = getTotalSum(cartProducts);
+cartCountElem.textContent = cartProducts.length;
+
+cartDivElems.addEventListener("click", (e) => {
+  if (e.target.tagName !== "BUTTON") return;
+
+  const id = e.target.dataset.id;
+  const name = e.target.dataset.name;
+  const price = Number(e.target.dataset.price);
+  const obj = { id, name, price };
+
+  cartProducts.push(obj);
+  localStorage.setItem("cart", JSON.stringify(cartProducts));
+
+  cartSummaryElem.textContent = getTotalSum(cartProducts);
+  console.log(getTotalSum(cartProducts));
+
+  cartCountElem.textContent = cartProducts.length;
+});

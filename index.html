@@ -20,6 +20,29 @@
       <button id="clear-btn">Очистити все</button>
       <ul id="todo-ul"></ul>
     </div>
+    <p id="counter-text"></p>
+
+    <div class="products-list">
+      <button class="add-to-cart" data-id="1" data-name="Книга" data-price="15">
+        Купити Книгу (15$)
+      </button>
+      <button class="add-to-cart" data-id="2" data-name="Пенал" data-price="5">
+        Купити Пенал (5$)
+      </button>
+      <button
+        class="add-to-cart"
+        data-id="3"
+        data-name="Рюкзак"
+        data-price="40"
+      >
+        Купити Рюкзак (40$)
+      </button>
+    </div>
+    <hr />
+    <div id="cart-summary">
+      У кошику товарів: <span id="cart-count">0</span> | Сума:
+      <span id="cart-sum">0</span>$
+    </div>
 
     <script type="module" src="/main.js"></script>
   </body>
